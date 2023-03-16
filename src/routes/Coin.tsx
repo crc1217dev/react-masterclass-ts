@@ -135,8 +135,13 @@ const Container = styled.div`
 const Header = styled.header`
   height: 10vh;
   display: flex;
-  justify-content: center;
   align-items: inherit;
+  margin: auto 0;
+  a {
+    display: flex;
+    align-items: center;
+    margin-right: 50px;
+  }
 `;
 
 const Title = styled.h1`
@@ -229,6 +234,7 @@ function Coin() {
   return (
     <Container>
       <Header>
+        <Link to={"/"}>Home &rarr;</Link>
         <Title>
           {state?.name ? state.name : loading ? "Loading..." : infoData?.name}
         </Title>
