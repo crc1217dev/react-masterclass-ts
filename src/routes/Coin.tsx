@@ -11,6 +11,7 @@ import styled from "styled-components";
 import { fetchCoinInfo, fetchCoinTickers } from "../api";
 import Chart from "./Chart";
 import Price from "./Price";
+import { Helmet } from "react-helmet";
 
 interface Params {
   coinId: string;
@@ -226,12 +227,18 @@ function Coin() {
     ["tickers", coinId],
     function () {
       return fetchCoinTickers(coinId);
-    }
+    },
+    { refetchInterval: 5000 }
   );
   const loading = infoLoading || tickersLoading;
 
   return (
     <Container>
+      <Helmet>
+        <title>
+          {state?.name ? state.name : loading ? "Loading..." : infoData?.name}
+        </title>
+      </Helmet>
       <Header>
         <Link to={"/"}>Home &rarr;</Link>
         <Title>
