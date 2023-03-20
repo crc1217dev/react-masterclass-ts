@@ -23,10 +23,11 @@ function Chart({ coinId }: ChartProps) {
   const { data, isLoading } = useQuery<IHistorical[]>(["ohlcv", coinId], () =>
     fetchCoinHistory(coinId)
   );
+  console.log(data);
   const eData = data ?? [];
-  const chartData = eData?.map((item) => {
+  const chartData = eData.map((item) => {
     return {
-      x: item.time_close,
+      x: item.time_open,
       y: [item.open, item.high, item.low, item.close],
     };
   });
@@ -72,6 +73,9 @@ function Chart({ coinId }: ChartProps) {
               axisTicks: { show: false },
               labels: { show: false },
               type: "datetime",
+              categories: chartData.map((item) => {
+                new Date(item.x).getTime();
+              }),
             },
             fill: {
               type: "gradient",
