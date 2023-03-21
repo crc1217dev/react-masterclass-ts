@@ -5,7 +5,7 @@ import { useRecoilValue } from "recoil";
 import { isDarkAtom } from "../atoms";
 
 interface IHistorical {
-  time_open: string;
+  time_open: number;
   time_close: number;
   open: number;
   high: number;
@@ -27,7 +27,7 @@ function Chart({ coinId }: ChartProps) {
   const eData = data ?? [];
   const chartData = eData.map((item) => {
     return {
-      x: item.time_open,
+      x: item.time_close * 1000,
       y: [item.open, item.high, item.low, item.close],
     };
   });
@@ -73,9 +73,6 @@ function Chart({ coinId }: ChartProps) {
               axisTicks: { show: false },
               labels: { show: false },
               type: "datetime",
-              categories: chartData.map((item) => {
-                new Date(item.x).getTime();
-              }),
             },
             fill: {
               type: "gradient",
