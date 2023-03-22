@@ -56,8 +56,8 @@ const Overview = styled.div`
   font-weight: 400;
   padding: 14px;
   border-radius: 10px;
-  color: aliceblue;
-  background-color: rgba(0, 0, 0, 0.5);
+  color: ${(props) => props.theme.textColor};
+  background-color: ${(props) => props.theme.overviewBgColor};
 `;
 const OverviewItem = styled.div`
   display: flex;
